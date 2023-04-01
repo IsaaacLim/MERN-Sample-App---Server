@@ -45,7 +45,7 @@ const createNewUser = asyncHandler(async (req, res) => {
   const user = await User.create(userObject);
 
   if (user) {
-    res.status(201).json({ message: `New user ${username} created}` });
+    res.status(201).json({ message: `New user ${username} created` });
   } else {
     res.status(400).json({ message: "Invalid data received" });
   }
@@ -67,7 +67,13 @@ const updateUser = asyncHandler(async (req, res) => {
     !roles.length ||
     typeof active !== "boolean"
   ) {
-    return res.status(400).json({ message: "User not found" });
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
+  const user = await User.findById(id).exec();
+
+  if (!user) {
+    return res.status(400).json({ message: "User not found" }); // todo: fix this error
   }
 
   // Check for duplicate
@@ -89,7 +95,7 @@ const updateUser = asyncHandler(async (req, res) => {
 
   const updatedUser = await user.save();
 
-  res.json({ message: `${updateUser.username} updated` });
+  res.json({ message: `${updatedUser.username} updated` });
 });
 
 /**
@@ -105,19 +111,19 @@ const deleteUser = asyncHandler(async (req, res) => {
     return res.status(400).json({ message: "User ID required" });
   }
 
-  const notes = await Note.findOne({ user: id }).lean().exec();
+  const user = await User.findById(id).exec();
 
-  if (notes?.length) {
+  if (!user) {
+    return res.status(400).json({ message: "User not found" }); // todo: fix this error
+  }
+
+  const note = await Note.findOne({ user: id }).lean().exec();
+
+  if (note) {
     return res.status(400).json({ message: "User has assigned notes" });
   }
 
-  const user = await User.findById(id).exec;
-
-  if (!user) {
-    return res.status(400).json({ message: "User not found" });
-  }
-
-  const result = await User.deleteOne();
+  const result = await user.deleteOne();
 
   const reply = `Username ${user.username} with ID ${result._id} deleted`;
 
