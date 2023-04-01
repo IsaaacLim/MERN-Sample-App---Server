@@ -1,5 +1,5 @@
 const User = require("../models/Users");
-const Announcement = require("../models/Announcement");
+const Announcement = require("../models/Announcements");
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcrypt");
 
@@ -100,7 +100,7 @@ const updateUser = asyncHandler(async (req, res) => {
 
 /**
  * @desc Delete a user
- * @route Delete /user
+ * @route Delete /users
  * @access Private
  */
 const deleteUser = asyncHandler(async (req, res) => {

@@ -3,11 +3,11 @@ const AutoIncrement = require("mongoose-sequence")(mongoose);
 
 const announcementSchema = new mongoose.Schema(
   {
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-      ref: "User",
-    },
+    // user: {
+    //   type: mongoose.Schema.Types.ObjectId,
+    //   required: true,
+    //   ref: "User",
+    // },
     title: {
       type: String,
       required: true,
@@ -15,10 +15,6 @@ const announcementSchema = new mongoose.Schema(
     text: {
       type: String,
       required: true,
-    },
-    completed: {
-      type: Boolean,
-      default: false,
     },
   },
   {
