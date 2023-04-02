@@ -117,6 +117,10 @@ const deleteUser = asyncHandler(async (req, res) => {
     return res.status(400).json({ message: "User not found" }); // todo: fix this error
   }
 
+  if (user.role === "sudo") {
+    return res.status(400).json({ message: "Cannot delete sudo" });
+  }
+
   const announcement = await Announcement.findOne({ user: id }).lean().exec();
 
   if (announcement) {
