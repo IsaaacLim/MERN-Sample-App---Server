@@ -55,7 +55,7 @@ const updateAnnouncement = asyncHandler(async (req, res) => {
   const announcement = await Announcement.findById(id).exec();
 
   if (!announcement) {
-    return res.status(400).json({ message: "User not found" }); // todo: fix this error
+    return res.status(400).json({ message: "Announcement not found" }); // todo: fix this error
   }
 
   announcement.title = title;
