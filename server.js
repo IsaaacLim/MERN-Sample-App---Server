@@ -29,6 +29,7 @@ app.use("/", require("./routes/root"));
 app.use("/users", require("./routes/userRoutes"));
 app.use("/announcements", require("./routes/announcementRoutes"));
 app.use("/auth", require("./routes/authRoutes"));
+app.use("/quickLinks", require("./routes/quickLinkRoutes"));
 
 app.all("*", (req, res) => {
   res.status(404);
