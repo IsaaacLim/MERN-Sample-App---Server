@@ -22,10 +22,10 @@ const announcementSchema = new mongoose.Schema(
   }
 );
 
-announcementSchema.plugin(AutoIncrement, {
-  inc_field: "ticket",
-  id: "ticketNums",
-  start_seq: 500,
-});
+// announcementSchema.plugin(AutoIncrement, {
+//   inc_field: "ticket",
+//   id: "ticketNums",
+//   start_seq: 500,
+// });
 
 module.exports = mongoose.model("Announcement", announcementSchema);
