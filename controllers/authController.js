@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const asyncHandler = require("express-async-handler");
 
-const accessTokenLife = "10m";
+const accessTokenLife = "30m";
 
 /**
  * @desc Login
